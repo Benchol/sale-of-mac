@@ -1,0 +1,64 @@
+<div id="head" class="flex items-center justify-center">
+    <div class="flex w-4/5 h-14 mb-4 items-center justify-between">
+        <div class="logo w-1/6 h-full">
+            <img class="w-full h-full" src="assets/images/logo.png" alt="">
+        </div>
+        <form [formGroup]="searchForm" class="search-bar flex items-center justify-center w-1/2 h-full">
+            <input type="text" placeholder="search" formControlName="keyWord" class="w-5/6 h-4/6 rounded-l-md pl-2 text-sm">
+            <div class="flex w-1/6 h-4/6 items-center justify-center cursor-pointer">
+                <fa-icon [icon]="faSearch" class="w-full h-full flex items-center justify-center bg-[#7FB5FF] rounded-r-md"></fa-icon>
+            </div>
+        </form>
+        <div *ngIf="!connected$ else account" class="account cursor-pointer w-1/4 h-4/6 flex justify-center items-center rounded-md">
+            <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/2 mr-1" [routerLink]="['/auth/login']">
+                <fa-icon [icon]="faUser"></fa-icon>
+                <span class="text-sm ml-2">Login</span>
+            </div>
+            <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/2" [routerLink]="['/auth/register']">
+                <fa-icon [icon]="faRegistered"></fa-icon>
+                <span class="text-sm ml-2">Register</span>
+            </div>
+        </div>
+        <ng-template #account>
+            <div class="account cursor-pointer w-1/4 h-4/6 flex justify-center items-center rounded-md">
+                <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/2 mr-1" (click)="toProfil()">
+                    <fa-icon [icon]="faUserCheck"></fa-icon>
+                    <span class="text-sm ml-2">My account</span>
+                </div>
+                <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/2 " (click)="toCart()">
+                    <fa-icon [icon]="faShoppingCart"></fa-icon>
+                    <span class="text-sm ml-2">My cart</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+<p-breadcrumb class="flex w-full justify-center mb-6" [model]="items" [home]="home"></p-breadcrumb>
+
+
+<div id="profil" class="flex justify-center">
+    <div class="flex w-4/5">
+        <div class="flex w-2/12 items-start justify-start flex-col">
+            <div class="flex justify-start items-center mt-1">
+                <fa-icon [icon]="faUser"></fa-icon>
+                <span class="text-md ml-2">Mon Profil</span>
+            </div>
+            <div class="w-full h-fit bg-[#f6f6f6] rounded-sm cursor-pointer tracking-wider text-xs text-[#454c48] font-normal p-2.5 flex justify-start items-center mt-2.5" [routerLink]="['update-user']">Mes informations personnelles</div>
+            <div class="w-full h-fit bg-[#f6f6f6] rounded-sm cursor-pointer tracking-wider text-xs text-[#454c48] font-normal p-2.5 flex justify-start items-center mt-1.5" [routerLink]="['identifiants']">Mes identifiants et mot de passe</div>
+            <div class="w-full h-fit bg-[#f6f6f6] rounded-sm cursor-pointer tracking-wider text-xs text-[#454c48] font-normal p-2.5 flex justify-start items-center mt-1.5" [routerLink]="['consent']">Mes consentements</div>
+
+            <div class="flex justify-start items-center mt-2">
+                <fa-icon [icon]="faUser"></fa-icon>
+                <span class="text-md ml-2">Mes achats</span>
+            </div>
+            <div class="w-full h-fit bg-[#f6f6f6] rounded-sm cursor-pointer tracking-wider text-sm text-[#454c48] font-normal p-2.5 flex justify-start items-center mt-2.5" [routerLink]="['list']">Mes commandes</div>
+        </div>
+        <div class="flex w-10/12 flex-col pl-12">
+            <router-outlet></router-outlet>
+            <div class="flex w-full h-64">
+                <img class="w-full h-full" src="assets/images/promoo.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="container-login relative flex w-screen h-screen  overflow-hidden items-center backdrop-blur-md justify-center">
+    <div class=" absolute w-full h-full blur -z-10 backdrop-blur-md ">
+        <img src="assets/images/bk1.jpg" class="w-full h-full" alt="">
+    </div>
+    <div class="flex flex-col w-1/2 h-3/4 shadow-2xl rounded-lg">
+        <div class="head-img flex w-full h-1/4 relative rounded-t-lg bg-cover bg-center bg-[#d7eeff]" style="background-image: url('/src/assets/images/ll.jpg');">
+            <img class="w-full h-full rounded-t-lg" src="assets/images/header-background.png" alt="">
+            <span class="absolute w-full h-full flex items-center justify-center text-3xl text-[#eceef1] tracking-wide">Login</span>
+            <!-- <div class="flex absolute w-full justify-between">
+                <div class="login cursor-pointer mt-1 mx-2 rounded-lg text-xs border w-1/6 py-1.5 ">Login</div>
+                <div class="register cursor-pointer mt-1 mx-2 rounded-lg text-xs  border w-1/6 py-1.5 ">Register</div>
+            </div> -->
+        </div>
+        <div class=" w-full h-3/4 rounded-b-lg bg-[#eceef1]">
+            <form [formGroup]="loginForm" class="flex flex-col justify-center items-center">
+                <div class="formGroup flex w-2/3 h-16 mt-3 text-sm">
+                    <!-- <label class="flex items-end justify-center pb-2.5 pr-8">Username: </label> -->
+                    <mat-form-field class="w-full" appearance="standard">
+                        <mat-label class="text-[#737373]">Username</mat-label>
+                        <input type="text" matInput formControlName="usernameFormControl" placeholder="JohnDoe">
+                    </mat-form-field>
+                </div>
+                <div class="formGroup w-2/3 h-16 mt-3 text-sm">
+                    <mat-form-field class="w-full" appearance="standard">
+                        <mat-label class="text-[#737373]">Password</mat-label>
+                        <input type="password" matInput formControlName="passwordFormControl" placeholder="******">
+                    </mat-form-field>
+                </div>
+                <p routerLink="/" class="text-[#8297dd] w-2/3 text-right cursor-pointer text-xs mt-4">Forgotten password?</p>
+                <div class="flex items-center justify-center w-full mt-6">
+                    <span class="text-sm w-1/3 text-center bg-[#59b74c] px-5 py-2 rounded-lg cursor-pointer text-white" (click)="login()">Login</span>
+                </div>
+            </form>
+            <div class="flex flex-col w-full mt-5 h-fit">
+                <span class="w-full text-center text-sm">OR</span>
+                <div class="flex w-full items-center justify-center mt-5">
+                    <div class="flex px-5 bg-[#bf211e] mr-2 w-1/4 items-center justify-center cursor-pointer py-2 rounded-lg text-sm text-white"><i class="fa-brands fa-google"></i><span class="ml-1.5">Gmail</span></div>
+                    <div class="flex px-5 bg-[#4181ec] ml-2 w-1/4 items-center justify-center cursor-pointer py-2 rounded-lg text-sm text-white"><i class="fa-brands fa-facebook-f"></i><span class="ml-1.5">Facebook</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

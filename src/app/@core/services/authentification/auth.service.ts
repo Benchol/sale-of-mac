@@ -1,0 +1,35 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+
+  apiUrl = 'http://localhost:3000/api/user'
+
+  connected = new BehaviorSubject<boolean>(false);
+
+  constructor(private http: HttpClient) { }
+
+  getToken() {
+    return localStorage.getItem('token')
+  }
+
+  onRegister(name: String, username: String, email: String, password: String): Observable<any> {
+    return this.http.post<Observable<any>>(`${this.apiUrl}/register`, {
+      name: name,
+      username: username,
+      email: email,
+      password: password
+    })
+  }
+
+  onLogin(username: String, password: String): Observable<any> {
+    return this.http.post<Observable<any>>(`${this.apiUrl}/login`, {
+      username: username,
+      password: password
+    })
+  }
+}

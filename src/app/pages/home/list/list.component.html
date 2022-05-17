@@ -1,0 +1,162 @@
+<div id="head" class="flex items-center justify-center">
+    <div class="flex w-4/5 h-14 mb-4 items-center justify-between">
+        <div class="logo w-1/6 h-full">
+            <img class="w-full h-full" src="assets/images/logo.png" alt="">
+        </div>
+        <form [formGroup]="searchForm" class="search-bar flex items-center justify-center w-1/2 h-full">
+            <input type="text" placeholder="search" formControlName="keyWord" class="w-5/6 h-4/6 rounded-l-md pl-2 text-sm">
+            <div class="flex w-1/6 h-4/6 items-center justify-center cursor-pointer" (click)="search()">
+                <fa-icon [icon]="faSearch" class="w-full h-full flex items-center justify-center bg-[#7FB5FF] rounded-r-md"></fa-icon>
+            </div>
+        </form>
+        <div *ngIf="!connected else account" class="account cursor-pointer w-1/4 h-4/6 flex justify-center items-center rounded-md">
+            <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/2 mr-1" [routerLink]="['/auth/login']">
+                <fa-icon [icon]="faUser"></fa-icon>
+                <span class="text-sm ml-2">Login</span>
+            </div>
+            <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/2" [routerLink]="['/auth/register']">
+                <fa-icon [icon]="faRegistered"></fa-icon>
+                <span class="text-sm ml-2">Register</span>
+            </div>
+        </div>
+        <ng-template #account>
+            <div class="account cursor-pointer w-1/4 h-4/6 flex justify-center items-center rounded-md">
+                <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/2 mr-1" [routerLink]="['/home/profil-user']">
+                    <fa-icon [icon]="faUserCheck"></fa-icon>
+                    <span class="text-sm ml-2">My account</span>
+                </div>
+                <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/2 ">
+                    <fa-icon [icon]="faShoppingCart"></fa-icon>
+                    <span class="text-sm ml-2">My cart</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+
+<p-breadcrumb class="flex w-full justify-center mb-6" [model]="items" [home]="home"></p-breadcrumb>
+
+
+<div class="flex h-5/6 items-center justify-center relative overflow-x-hidden " *ngIf="!isLoaded else list ">
+    <div class="absolute z-0 h-full w-full blur-md bg-slate-100 "></div>
+    <div class="absolute z-10 w-1/4 h-1/4 " #loading></div>
+</div>
+
+<ng-template #list>
+    <div id="list " class="flex justify-center ">
+        <div class="flex w-4/5 ">
+            <form [formGroup]="filterForm" class="filter flex w-2/12 h-fit flex-col">
+                <span class="text-sm mb-5">Affiner votre recherche</span>
+                <div class="flex flex-col">
+                    <span class="text-sm font-medium">Processeur</span>
+                    <ul class="text-xs ml-3">
+                        <li>
+                            <input (change)="onChange()" formControlName="proc_type_M1_pro" type="checkbox">M1 Pro / M1 Max
+                        </li>
+                        <li>
+                            <input formControlName="proc_type_M1" type="checkbox"> M1
+                        </li>
+                        <li>
+                            <input formControlName="proc_type_i7" type="checkbox"> i7
+                        </li>
+                        <li>
+                            <input formControlName="proc_type_i5" type="checkbox"> i5
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-sm font-medium">Ecran</span>
+                    <ul class="text-xs ml-3">
+                        <li>
+                            <input type="checkbox" formControlName="ecran_16">16"
+                        </li>
+                        <li>
+                            <input type="checkbox" formControlName="ecran_14"> 14"
+                        </li>
+                        <li>
+                            <input type="checkbox" formControlName="ecran_13"> 13"
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-sm font-medium">Memoire RAM</span>
+                    <ul class="text-xs ml-3">
+                        <li>
+                            <input type="checkbox" formControlName="ram_16">16 Go
+                        </li>
+                        <li>
+                            <input type="checkbox" formControlName="ram_8"> 8 Go
+                        </li>
+                        <li>
+                            <input type="checkbox" formControlName="ram_4"> 4 Go
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-sm font-medium">Disque Dur</span>
+                    <ul class="text-xs ml-3">
+                        <li>
+                            <input type="checkbox" formControlName="dur_1_To_ssd"> 1 To SSD
+                        </li>
+                        <li>
+                            <input type="checkbox" formControlName="dur_512_Go_ssd">512 Go SSD
+                        </li>
+                        <li>
+                            <input type="checkbox" formControlName="dur_256_Go_ssd"> 256 Go SSD
+                        </li>
+                        <li>
+                            <input type="checkbox" formControlName="dur_500_Go"> 500 Go
+                        </li>
+                        <li>
+                            <input type="checkbox" formControlName="dur_256_Go"> 256 Go
+                        </li>
+                        <li>
+                            <input type="checkbox" formControlName="dur_320_Go"> 320 Go
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-sm font-medium">Triage</span>
+                    <ul class="text-xs ml-3">
+                        <li>
+                            <input type="checkbox"> du mois à plus chère
+                        </li>
+                        <li>
+                            <input type="checkbox"> du plus à moins chère
+                        </li>
+                    </ul>
+                </div>
+                <div class="btn-filter flex items-center justify-center w-4/6 text-white rounded-lg mt-3 cursor-pointer text-xs bg-[#205375] p-1">
+                    appliquer
+                    <fa-icon class="pl-1.5" [icon]="faCheck"></fa-icon>
+                </div>
+            </form>
+            <div class="flex w-10/12 flex-col ">
+                <div class="flex w-full h-56 m-1 border-b-2" *ngFor="let item of dataPerPage">
+                    <div class="flex w-3/12 h-2/3 ">
+                        <img [src]="item.image " alt=" ">
+                    </div>
+                    <div class="flex w-6/12 h-full flex-col ">
+                        <h2 class="text-base mb-6 text-slate-500 cursor-pointer" [routerLink]="['details', item._id]">{{ item.title }}</h2>
+                        <ul class="text-xs list-disc ml-6 ">
+                            <li *ngIf="item.taille_de_l_ecran__en_pouces__diagonale__ "> {{ item.taille_de_l_ecran__en_pouces__diagonale__ }} </li>
+                            <li *ngIf="item.reference_du_processeur_ "> {{ item.reference_du_processeur_ }} </li>
+                            <li *ngIf="item. memoire_vive__ram__ "> RAM : {{ item. memoire_vive__ram__ }} </li>
+                            <li *ngIf="item.type_et_capacite_totale_de_stockage_ "> {{ item.type_et_capacite_totale_de_stockage_ }} </li>
+                        </ul>
+                    </div>
+                    <div class="flex w-3/12 h-full flex-col ">
+                        <h1 class="font-semibold text-xl mb-2 text-right mr-1 ">{{ item.price }} </h1>
+                        <p class="text-xs mb-2 mt-2 ">Vendu, examiné et certifié par nos entreprises</p>
+                        <div class="p-1.5 text-center mt-5 rounded-lg bg-[#205375] text-white cursor-pointer text-sm " (click)="addToCart(item._id)">
+                            <fa-icon [icon]="faShoppingCart" class="pr-1.5"></fa-icon>
+                            Ajouter au panier
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<mat-paginator class="text-black bg-white flex items-center justify-center w-full " [length]="length " [pageSize]="pageSize " (page)="changePage($event) "></mat-paginator>

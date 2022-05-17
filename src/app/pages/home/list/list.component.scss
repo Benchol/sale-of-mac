@@ -1,0 +1,41 @@
+::ng-deep .mat-paginator-container {
+    justify-content: center !important;
+}
+
+::ng-deep .mat-paginator-range-actions {
+    background: darkgray;
+    border-radius: 8px;
+}
+
+.search-bar {
+    input {
+        border: 1px solid black;
+        &:focus-visible {
+            border: 1px solid black;
+            outline: none;
+        }
+    }
+}
+
+.filter {
+    li {
+        margin: 5px 0;
+        display: flex;
+        align-items: center;
+        // justify-content: center;
+        input {
+            margin-right: 5px;
+        }
+    }
+}
+
+::ng-deep .p-breadcrumb {
+    width: 80%;
+    margin: 12px;
+    font-size: 12px;
+    border: none;
+    padding: 1rem 0 0.5rem 0;
+    border-bottom: 1px dashed;
+    border-radius: 0;
+    // border-top: 1px solid;
+}

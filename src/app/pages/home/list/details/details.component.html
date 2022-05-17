@@ -1,0 +1,126 @@
+<div id="head" class="flex items-center justify-center">
+    <div class="flex w-4/5 h-14 mb-4 items-center justify-between">
+        <div class="logo w-1/6 h-full">
+            <img class="w-full h-full" src="assets/images/logo.png" alt="">
+        </div>
+        <div class="search-bar flex items-center justify-center w-1/2 h-full">
+            <input type="text" placeholder="search" class="w-5/6 h-4/6 rounded-l-md pl-2 text-sm">
+            <div class="flex w-1/6 h-4/6 items-center justify-center cursor-pointer">
+                <fa-icon [icon]="faSearch" class="w-full h-full flex items-center justify-center bg-[#7FB5FF] rounded-r-md"></fa-icon>
+            </div>
+        </div>
+        <div class="account w-1/6 h-4/6 flex justify-center items-center bg-[#7FB5FF] rounded-md">
+            <fa-icon [icon]=" faUser "></fa-icon>
+            <span class="text-sm ml-2">My account</span>
+            <!-- <i class="fas faUser fa-lg "></i> -->
+        </div>
+    </div>
+</div>
+
+
+<p-breadcrumb class="flex w-full justify-center mb-6" [model]="items" [home]="home"></p-breadcrumb>
+
+<div class="flex justify-center items-center" *ngIf="!isLoaded else details">
+    <div class="flex w-1/6" #loading></div>
+</div>
+
+<ng-template #details>
+    <div class="flex flex-col items-center justify-center">
+        <div class="flex w-4/5 pb-10 border-b-2">
+            <div class="flex flex-col w-2/3">
+                <h2 class="mb-3 text-xl"> {{ currentMaterial.title }} </h2>
+                <div class="mb-3">
+                    <div class="flex items-center">
+                        <p-rating [cancel]="false" [readonly]="true" [(ngModel)]="val"></p-rating><span class="ml-2 text-[#2096f3] text-xs">(109)</span>
+                    </div>
+                    <span class="text-xs text-[#424848]">Réf: {{ reference }}</span>
+                </div>
+                <div class="flex w-3/5">
+                    <img class="w-full h-full" [src]="currentMaterial.image" alt="">
+                </div>
+            </div>
+            <div class="flex flex-col w-2/5">
+                <div class="flex w-full justify-between h-fit items-center">
+                    <div class="flex flex-col price h-fit">
+                        <div class="flex items-center justify-between">
+                            <span class=" line-through text-sm">{{ currentMaterial.price }}</span> <span class="border-2 border-solid border-red-500 text-red-500 ml-2.5 rounded-md text-xs px-0.5">-8%</span>
+                        </div>
+                        <div class="flex items-center justify-center text-2xl mt-2 font-semibold text-[#434748]">
+                            {{ reducedPrice }} €
+                        </div>
+                    </div>
+                    <div class="p-1.5 text-center h-fit rounded-lg bg-[#205375] text-white cursor-pointer text-sm ">
+                        <fa-icon [icon]="faShoppingCart " class="pr-1.5 "></fa-icon>
+                        Ajouter au panier
+                    </div>
+                </div>
+                <span class="pb-5 pt-4 text-xs border-b-2">Produit neuf</span>
+                <div class="flex mt-3 border-b-2 pb-5">
+                    <ul>
+                        <li class="text-xs my-3">
+                            <fa-icon [icon]="faCheck" class="mr-1"></fa-icon> Retrait en magasin ou drive - offert
+                        </li>
+                        <li class="text-xs my-3">
+                            <fa-icon [icon]="faCheck" class="mr-1"></fa-icon> Livraison gratuit
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xs my-3"><li> Garantie 2ans</li></span>
+                    <span class="text-xs my-3"><li>Prolonger la garantie jusqu' à 3ans + antivirus inclus</li></span>
+                </div>
+            </div>
+        </div>
+        <!-- More descriptions -->
+        <div class="flex justify-start flex-col w-4/5 mb-10">
+            <h1 class="my-4 font-medium text-lg">Caracteristiques plus detaillé</h1>
+            <div class="flex flex-col mt-3">
+                <div class="flex bg-[#f6f6f6] py-1 px-4 font-medium">Ecran</div>
+                <ul class="ml-11 mt-3 text-xs">
+                    <li class="list-disc my-2"><span class="font-medium">Taille de l' écran: </span> {{currentMaterial.taille_de_l_ecran__en_pouces__diagonale__}} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Type de résolution: </span> {{currentMaterial.type_de_resolution_}} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Résolution: </span> {{ currentMaterial.resolution_ }} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Type de charnière: </span> {{ currentMaterial.type_de_charniere_ }} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Type d' écran: </span> {{ currentMaterial.type_d_ecran_ }} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Webcam intégrée: </span> {{ currentMaterial.webcam_integree_ }} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Microphone intégrée: </span> {{ currentMaterial.microphone_integre_ }} </li>
+                </ul>
+            </div>
+            <div class="flex flex-col mt-3">
+                <div class="flex bg-[#f6f6f6] py-1 px-4 font-medium">Performance</div>
+                <ul class="ml-11 mt-3 text-xs">
+                    <li class="list-disc my-2"><span class="font-medium">Référence du processeur: </span> {{currentMaterial.reference_du_processeur_}} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Mémoire vive (RAM): </span> {{currentMaterial.memoire_vive__ram__ }} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Information sur la mémoire vive: </span> {{ currentMaterial.information_sur_la_memoire_vive_ }} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Format de la mémoire vive: </span> {{ currentMaterial.format_de_la_memoire_vive_ }} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Fréquence de la mémoire vive (en MHz) : </span> {{ currentMaterial.frequence_de_la_memoire_vive__en_mhz__ }} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Webcam intégrée: </span> {{ currentMaterial.webcam_integree_ }} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Eligible à Intel Evo Platform : </span> {{ currentMaterial.eligible_a_intel_evo_platform_ }} </li>
+                </ul>
+            </div>
+            <div class="flex flex-col mt-3">
+                <div class="flex bg-[#f6f6f6] py-1 px-4 font-medium">Performance graphique</div>
+                <ul class="ml-11 mt-3 text-xs">
+                    <li class="list-disc my-2"><span class="font-medium">Carte graphique: </span> {{currentMaterial.carte_graphique_}} </li>
+                </ul>
+            </div>
+            <div class="flex flex-col mt-3">
+                <div class="flex bg-[#f6f6f6] py-1 px-4 font-medium">Stocker vos données</div>
+                <ul class="ml-11 mt-3 text-xs">
+                    <li class="list-disc my-2"><span class="font-medium">Type et capacité totale de stockage: </span> {{currentMaterial.type_et_capacite_totale_de_stockage_}} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Type de stockage: </span> {{currentMaterial.type_de_stockage_ }} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Lecteur de carte mémoire: </span> {{ currentMaterial.lecteur_de_carte_memoire_ }} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Lecteur / Graveur: </span> {{ currentMaterial.lecteur___graveur_ }} </li>
+                </ul>
+            </div>
+            <div class="flex flex-col mt-3">
+                <div class="flex bg-[#f6f6f6] py-1 px-4 font-medium">Autres</div>
+                <ul class="ml-11 mt-3 text-xs">
+                    <li class="list-disc my-2"><span class="font-medium">Anti-reflet: </span> {{currentMaterial.anti_reflets_}} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Nombre de coeurs: </span> {{currentMaterial.nombre_de_coeurs_}} </li>
+                    <li class="list-disc my-2"><span class="font-medium">Intérêt du nombre de coeurs: </span> {{ currentMaterial.interet_du_nombre_de_coeurs_ }} </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</ng-template>

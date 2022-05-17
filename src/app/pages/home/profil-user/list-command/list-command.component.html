@@ -1,0 +1,27 @@
+<div class="flex w-full h-52 mb-16 relative">
+    <img src="assets/images/fond-profil.jpg" class="flex w-full h-full object-cover" alt="">
+    <div class="flex absolute -bottom-5 left-10 p-2 bg-[#008196] px-4 text-white font-medium shadow-xl shadow-lg"> Bonjour {{ user$?.name }} !</div>
+    <div class="flex absolute -bottom-16 left-20 p-2 bg-[#205375] px-4 text-white font-medium shadow-xl shadow-lg">Bienvenue dans votre espace privé Karoka</div>
+</div>
+<div class="flex flex-col">
+    <div class="flex mt-8 font-medium">Mes commandes en cours</div>
+    <div class="flex flex-col mt-6">
+        <span class="flex" *ngIf="(length==0) else list">Vous n' avez pas de commandes en cours</span>
+        <ng-template #list>
+            <div id="list_cart" class="flex text-xs w-5/6 h-16 items-center justify-between my-8" *ngFor="let material of user$.cart">
+                <div class="flex items-center justify-between  border-b-2">
+                    <div class="flex w-1/6">
+                        <img class="flex h-full w-full" [src]="material.image" alt="">
+                    </div>
+                    <div class="flex w-4/6"> {{ material.title }} </div>
+                    <div class="flex w-1/6 justify-end"> {{ material.price }} </div>
+                </div>
+                <div class="flex items-center justify-center ml-6 cursor-pointer" (click)="deleteInCart(material._id)">
+                    <!-- <fa-icon class="flex text-red-500" [icon]="faClose"></fa-icon> -->
+                    <i class="fa-solid fa-xmark flex text-red-500"></i>
+                    <span class="flex text-red-500 ml-2">supprimer</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

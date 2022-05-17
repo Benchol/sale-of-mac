@@ -1,0 +1,52 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/@core/services/authentification/auth.service';
+import { GlobalService } from 'src/app/@core/services/global/global.service';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
+})
+export class LoginComponent implements OnInit {
+
+  loginForm!: FormGroup;
+
+
+  constructor(private formBuilder: FormBuilder,
+      private authService: AuthService, 
+      private globalService: GlobalService,
+      private router:  Router
+      ) { }
+
+  ngOnInit(): void {
+    this.initForm()
+  }
+
+  initForm() {
+    this.loginForm = this.formBuilder.group({
+      usernameFormControl: ['Benchol',  Validators.required],
+      passwordFormControl: ['123456', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
+    })
+  }
+
+  login() {
+    const username = this.loginForm.get('usernameFormControl')?.value;
+    const password = this.loginForm.get('passwordFormControl')?.value;
+
+    this.authService.onLogin(username, password)
+      .subscribe(
+        data => {
+          if(data.status) {
+            this.globalService.user.next(data.data)
+            console.log(this.globalService.user);
+            localStorage.setItem('token', data.token)
+            this.authService.connected.next(true)            
+            this.router.navigate(['/home/list'])
+          }
+        }
+      )
+  }
+
+}
