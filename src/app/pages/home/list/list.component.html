@@ -21,11 +21,15 @@
         </div>
         <ng-template #account>
             <div class="account cursor-pointer w-1/4 h-4/6 flex justify-center items-center rounded-md">
-                <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/2 mr-1" [routerLink]="['/home/profil-user']">
-                    <fa-icon [icon]="faUserCheck"></fa-icon>
-                    <span class="text-sm ml-2">My account</span>
+                <!-- <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/2 mr-1" [routerLink]="['/home/profil-user']"> -->
+                <!-- <fa-icon [icon]="faUserCheck"></fa-icon>
+                    <span class="text-sm ml-2">My account</span> -->
+                <div class="flex h-full mr-6 object-cover relative" [routerLink]="['/home/profil-user']">
+                    <img src="assets/images/logoMac.png" class="w-full h-full rounded-full" alt="">
+                    <div class="flex absolute z-2"></div>
                 </div>
-                <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/2 ">
+                <!-- </div> -->
+                <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/2 " [routerLink]="['/home/profil-user']">
                     <fa-icon [icon]="faShoppingCart"></fa-icon>
                     <span class="text-sm ml-2">My cart</span>
                 </div>
@@ -160,3 +164,7 @@
     </div>
 </ng-template>
 <mat-paginator class="text-black bg-white flex items-center justify-center w-full " [length]="length " [pageSize]="pageSize " (page)="changePage($event) "></mat-paginator>
+<div class="flex w-full h-64">
+    <div class="flex w-1/5"></div>
+    <img class="w-3/5 h-full" src="assets/images/promoo.png" alt="">
+</div>

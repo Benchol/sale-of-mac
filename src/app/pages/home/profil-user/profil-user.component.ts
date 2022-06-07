@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faSearch, faUser, faCheck, faShoppingCart, faRegistered, faUserCheck, faClose, faDeleteLeft } from '@fortawesome/free-solid-svg-icons';
-// import { User } from 'ionic';
 import { User } from 'src/app/@core/model/material/user.model';
 import { MenuItem } from 'primeng/api';
 import { BehaviorSubject } from 'rxjs';
@@ -58,6 +57,7 @@ export class ProfilUserComponent implements OnInit {
         if(user) {
           this.user$ = user;
           console.log('New user => ', this.user$);
+          console.log('Cart ', typeof(this.user$.cart));
           
           this.length = this.user$.cart.length;
           console.log('USER => ', this.length);

@@ -1,30 +1,37 @@
 <form [formGroup]="updateForm" class="flex flex-col text-[#0009]">
-    <div class="formGroup">
+    <div class="formGroup my-1">
         <mat-form-field appearance="fill">
             <mat-label class="text-xs text-[#0009]">Name</mat-label>
-            <input type="text" matInput formControlName="nameFormControl" placeholder="john Doe">
-            <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                Please enter a valid email address
-            </mat-error> -->
-            <!-- <mat-error *ngIf="emailFormControl.hasError('required')">
-                Email is <strong>required</strong>
-            </mat-error> -->
+            <input class="text-sm" type="text" matInput formControlName="nameFormController" placeholder="john Doe">
+            <mat-error *ngIf=" !updateForm.hasError('required')">
+                Name required
+            </mat-error>
         </mat-form-field>
     </div>
-    <div class="formGroup">
+    <div class="formGroup my-1">
         <mat-form-field appearance="fill">
             <mat-label class="text-xs text-[#0009]">Username</mat-label>
-            <input type="text" matInput formControlName="usernameFormControl" placeholder="Benchol">
+            <input class="text-sm" type="text" matInput formControlName="usernameFormController" placeholder="Benchol">
+            <mat-error *ngIf=" !updateForm.hasError('required')">
+                Username required
+            </mat-error>
         </mat-form-field>
     </div>
-    <div class="formGroup">
+    <div class="formGroup my-1">
         <mat-form-field appearance="fill">
             <mat-label class="text-xs text-[#0009]">Wallet</mat-label>
-            <input type="number" matInput formControlName="walletFormControl">
+            <input class="text-sm" type="number" matInput formControlName="walletFormController">
+            <mat-error *ngIf=" !updateForm.hasError('required')">
+                Your wallet is required
+            </mat-error>
         </mat-form-field>
     </div>
+    <div class="formGroup my-1">
+        <label class="text-xs text-[#0009]">Your picture</label>
+        <input class="text-sm" type="file" formControlName="imageFormController">
+    </div>
 
-    <div class="flex items-center justify-center w-full h-fit">
+    <div class="flex items-center cursor-pointer justify-center w-full h-fit" (click)="updateUser()">
         <span class="flex py-2 px-6 text-sm bg-rose-500 rounded-lg">Enregistrer les modifications</span>
     </div>
 </form>

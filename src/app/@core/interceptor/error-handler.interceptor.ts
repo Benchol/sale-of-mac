@@ -9,12 +9,13 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from "rxjs/operators";
 import { Router } from '@angular/router';
+import { AuthService } from '../services/authentification/auth.service';
 
 
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {
 
-  constructor(private route: Router) { }
+  constructor(private route: Router, private authService: AuthService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     console.log("Passed through the interceptor in request");
@@ -37,9 +38,16 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
             errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
           }
           console.log('ERROR => ', errorMsg);
-          this.route.navigate(['not-found'], {queryParams: {
-            message: errorMsg
-          }})
+          if(error.status == 404 ) {
+            this.route.navigate(['not-found'], {queryParams: {
+              message: errorMsg
+            }})
+          } else if(error.status == 401) {
+            this.authService.error.next({
+              message: error.error.message,
+              status: true
+            })
+          }
           return throwError(errorMsg);
         })
       )

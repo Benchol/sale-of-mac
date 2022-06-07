@@ -1,8 +1,11 @@
-<div class="container w-screen h-screen relative">
+<div class="container relative w-screen h-screen relative">
     <div #notFound class="container-not-found w-full h-full absolute"></div>
 
     <div class="login absolute py-1 px-2 flex items-center justify-center bg-[#fc6c38] mt-1 ml-1 rounded-lg cursor-pointer">
         <fa-icon [icon]="faUser"></fa-icon>
         <span class="pl-1" [routerLink]="['/']">Reconnect</span>
+    </div>
+    <div class="absolute top-5 right-5 z-4">
+        {{ errorMessage }}
     </div>
 </div>

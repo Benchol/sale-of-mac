@@ -13,15 +13,28 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
+  error!: boolean;
+  errorMessage!: string;
+
 
   constructor(private formBuilder: FormBuilder,
       private authService: AuthService, 
       private globalService: GlobalService,
       private router:  Router
-      ) { }
+      ) {
+        this.error = false;
+       }
 
   ngOnInit(): void {
     this.initForm()
+    this.authService.error.subscribe((error: any) => {
+      if(error) {
+        this.error = error.status
+        this.errorMessage = error.message
+      }
+      console.log('staty : ', this.error);
+      
+    })
   }
 
   initForm() {
@@ -29,6 +42,11 @@ export class LoginComponent implements OnInit {
       usernameFormControl: ['Benchol',  Validators.required],
       passwordFormControl: ['123456', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
     })
+    // this.authService.error.subscribe(
+    //   (err: any) => {
+    //     this.error = err
+    //   }
+    // )
   }
 
   login() {

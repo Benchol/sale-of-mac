@@ -16,7 +16,7 @@ import { UpdateUserComponent } from './profil-user/update-user/update-user.compo
 import { ListCommandComponent } from './profil-user/list-command/list-command.component';
 import { ConsentComponent } from './profil-user/consent/consent.component';
 import { IdentifiantsComponent } from './profil-user/identifiants/identifiants.component';
-import { FooterComponent } from 'src/app/pages/shared/footer/footer.component';
+import { FooterComponent } from 'src/app/pages/home/shared/footer/footer.component';
 
 
 @NgModule({

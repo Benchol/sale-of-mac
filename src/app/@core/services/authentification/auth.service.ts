@@ -10,6 +10,7 @@ export class AuthService {
   apiUrl = 'http://localhost:3000/api/user'
 
   connected = new BehaviorSubject<boolean>(false);
+  error = new BehaviorSubject<any | null>(null);
 
   constructor(private http: HttpClient) { }
 

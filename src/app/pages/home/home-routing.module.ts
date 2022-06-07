@@ -18,41 +18,48 @@ const routes: Routes = [
     // component: HomeComponent
   },
   {
-    path: 'list',
-    component: ListComponent
-  },
-  {
-    path: 'list/details/:macID',
-    // canActivate: [AuthGuard],
-    component: DetailsComponent
-  },
-  {
-    path: 'profil-user',
-    canActivate: [AuthGuard],
-    component: ProfilUserComponent,
+    path: '',
+    component: HomeComponent,
     children: [
       {
-        path: '',
-        component: ListCommandComponent
-      },
-      {
         path: 'list',
-        component: ListCommandComponent
+        component: ListComponent
       },
       {
-        path: 'update-user',
-        component: UpdateUserComponent
+        path: 'list/details/:macID',
+        // canActivate: [AuthGuard],
+        component: DetailsComponent
       },
       {
-        path: 'consent',
-        component: ConsentComponent
-      },
-      {
-        path: 'identifiants',
-        component: IdentifiantsComponent
+        path: 'profil-user',
+        canActivate: [AuthGuard],
+        component: ProfilUserComponent,
+        children: [
+          {
+            path: '',
+            component: ListCommandComponent
+          },
+          {
+            path: 'list',
+            component: ListCommandComponent
+          },
+          {
+            path: 'update-user',
+            component: UpdateUserComponent
+          },
+          {
+            path: 'consent',
+            component: ConsentComponent
+          },
+          {
+            path: 'identifiants',
+            component: IdentifiantsComponent
+          }
+        ]
       }
     ]
-  }
+  },
+  
 ];
 
 @NgModule({

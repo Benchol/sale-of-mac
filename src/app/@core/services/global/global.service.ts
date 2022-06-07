@@ -27,4 +27,12 @@ export class GlobalService {
       idProduct: id
     })
   }
+
+  onUpdateUser(name: string, username: string, wallet: number): Observable<any> {    
+    return this.http.put<Observable<any>>(`${this.apiUrl}/user/updateUser`, {
+      name: name,
+      username: username,
+      wallet: wallet
+    })
+  }
 }

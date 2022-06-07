@@ -30,7 +30,7 @@ export class NotFoundComponent implements OnInit, AfterViewInit {
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      path: 'assets/animations/404-animation.json' // the path to the animation json
+      path: 'assets/animations/page-missing.json' // the path to the animation json
     })
   }
 
