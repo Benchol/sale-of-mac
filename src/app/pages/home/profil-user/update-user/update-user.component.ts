@@ -41,7 +41,12 @@ export class UpdateUserComponent implements OnInit {
     console.log('Updating...');
     const name = this.updateForm.get('nameFormController')?.value;
     const username = this.updateForm.get('usernameFormController')?.value;
-    const wallet = this.updateForm.get('walletFormController')?.value
+    const wallet = this.updateForm.get('walletFormController')?.value;
+    const image = this.updateForm.get('imageFormController')?.value
+
+    console.log('image => ', image);
+    
+
     this.globalService.onUpdateUser(name, username, wallet)
       .subscribe(
         data => {

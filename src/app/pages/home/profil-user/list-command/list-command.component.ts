@@ -28,6 +28,16 @@ export class ListCommandComponent implements OnInit {
     )
   }
 
+  createPayment(id: string) {
+      this.globalService.createPayment(id).subscribe(
+        (data: any) => {
+          if(data) {
+            console.log('Payment success : ', data.payment);
+          }
+        }
+      )
+  }
+
   deleteInCart(id: string) {
     this.globalService.deleteToCart(id)
       .subscribe(

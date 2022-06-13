@@ -22,6 +22,12 @@ export class GlobalService {
     });
   }
 
+  createPayment(id: string) {
+    return this.http.post<Observable<any>>(`${this.apiUrl}/user/createPayment`, {
+      idProduct: id
+    })
+  }
+
   deleteToCart(id: string): Observable<any> {
     return this.http.post<Observable<any>>(`${this.apiUrl}/user/deleteToCart`, {
       idProduct: id
