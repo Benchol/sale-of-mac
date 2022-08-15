@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from '../services/authentification/auth.service';
+import { GlobalService } from '../services/global/global.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class RefreshGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor( 
+      private globalService: GlobalService,
+      private router: Router
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    console.log('status guard ', this.authService.connected.value);
-    
-    if (this.authService.connected.value) {
+    if(this.globalService.refreshStatus) {
       return true;
     } else {
-      this.router.navigate(['/auth/login'])
+      this.router.navigate(['/home/list'])
       return false
     }
-    // return this.authService.connected
   }
-
+  
 }

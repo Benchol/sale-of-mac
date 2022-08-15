@@ -7,9 +7,9 @@ import { ListComponent } from './list/list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { materialModule } from 'src/app/@shared/material.UI/material.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {BreadcrumbModule} from 'primeng/breadcrumb';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { DetailsComponent } from './list/details/details.component';
-import {RatingModule} from 'primeng/rating';
+import { RatingModule } from 'primeng/rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfilUserComponent } from './profil-user/profil-user.component';
 import { UpdateUserComponent } from './profil-user/update-user/update-user.component';
@@ -17,6 +17,8 @@ import { ListCommandComponent } from './profil-user/list-command/list-command.co
 import { ConsentComponent } from './profil-user/consent/consent.component';
 import { IdentifiantsComponent } from './profil-user/identifiants/identifiants.component';
 import { FooterComponent } from 'src/app/pages/home/shared/footer/footer.component';
+import { PaymentComponent } from './profil-user/payment/payment.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { FooterComponent } from 'src/app/pages/home/shared/footer/footer.compone
     ListCommandComponent,
     ConsentComponent,
     IdentifiantsComponent,
-    FooterComponent
+    FooterComponent,
+    PaymentComponent
   ],
   imports: [
     CommonModule,
@@ -40,6 +43,7 @@ import { FooterComponent } from 'src/app/pages/home/shared/footer/footer.compone
     FontAwesomeModule,
     BreadcrumbModule,
     RatingModule,
+    AgGridModule,
     ...materialModule
   ]
 })

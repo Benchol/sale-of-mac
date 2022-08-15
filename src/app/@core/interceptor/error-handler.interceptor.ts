@@ -47,6 +47,10 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
               message: error.error.message,
               status: true
             })
+          } else if(error.status == 402) {
+            console.log('402 ann');
+            
+            this.route.navigate(['/auth/login'])
           }
           return throwError(errorMsg);
         })

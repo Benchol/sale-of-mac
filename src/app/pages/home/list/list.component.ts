@@ -51,6 +51,7 @@ export class ListComponent implements OnInit, AfterViewInit {
   //For Filter
   isCheck!: boolean;
 
+
   constructor(
       private dataService: DataService,
       private authService: AuthService,
@@ -100,11 +101,12 @@ export class ListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.globalService.refreshStatus = true
     this.initFilter()    
     this.initSearchForm()
     this.authService.connected.subscribe(
       status => {
-        this.connected = status;
+        this.connected = status;  
         console.log('Status =>', this.connected);
         
       }
@@ -130,10 +132,17 @@ export class ListComponent implements OnInit, AfterViewInit {
     this.isLoaded = false;
     this.dataService.getAllMaterials().subscribe(
       data => {
-        console.log('list => ', data);
+        console.log('list ss   => ', data);
 
         if (data.status) {
           console.log(data.message);
+          if(data.user) {
+            this.globalService.user.next(data.user)
+            console.log('Status connected: ', data.user.isConnected);
+            this.authService.connected.next(data.user.isConnected)
+          } else {
+            this.router.navigate(['/auth/login'])
+          }
           this.dataList = data.data;
           this.isLoaded = true;
           console.log(this.dataList);
@@ -144,6 +153,7 @@ export class ListComponent implements OnInit, AfterViewInit {
         }
       }
     )
+    console.log('Status connected : ', this.authService.connected);
   }
 
   initSearchForm() {

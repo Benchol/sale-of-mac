@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { User } from 'src/app/@core/model/material/user.model'
 import { GlobalService } from 'src/app/@core/services/global/global.service';
 
@@ -12,9 +14,36 @@ export class ListCommandComponent implements OnInit {
   user$!: User;
   length!: number;
 
-  constructor(private globalService: GlobalService) { }
+  constructor(
+      private globalService: GlobalService,
+      private router: Router,
+      private _snackbar: MatSnackBar
+    ) { }
 
   ngOnInit(): void {
+    console.log('Local storage: ', localStorage.getItem('token'));
+    console.log('Payment storage: ', localStorage.getItem('payment'))
+    if(localStorage.getItem('payment')) {
+      let id = localStorage.getItem('payment');
+      console.log('Payment exist...');
+      
+      this.globalService.getPayment(id).subscribe(
+        (result: any) => {
+          if(result.status) {
+            console.log('STATUS => ', result.payment.status);
+            if(result.payment.status == 'paid') {
+              console.log('Payment success... and draw monney in wallet of the user')
+            } else {
+              console.log('Payment not paid...')
+            }
+          } else {
+            console.log("Error payment => ", result);
+          }
+          localStorage.removeItem('payment')
+        }
+      )
+    }
+    
     this.globalService.user.subscribe(
       user => {
         if(user) {
@@ -28,11 +57,28 @@ export class ListCommandComponent implements OnInit {
     )
   }
 
-  createPayment(id: string) {
-      this.globalService.createPayment(id).subscribe(
+  createPayment(idUser: string, idProduct: string) {
+      this.globalService.createPayment(idUser, idProduct).subscribe(
         (data: any) => {
-          if(data) {
-            console.log('Payment success : ', data.payment);
+          alert(data.payment.status)
+          if(data.status) {
+            console.log('Payment successment : ', data.payment.amount.value);
+            this._snackbar.open('Payment success', 'ok', {
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+              duration: 6000,
+            })
+            // alert('fef')
+            localStorage.setItem('payment', data.payment.id);
+            // this.router.navigateByUrl(data.payment._links.checkout.href)
+            window.location.href = data.payment._links.checkout.href
+          } else {
+            console.log('Found insufficient...');
+            this._snackbar.open('Found insufficient...', 'ok', {
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+              duration: 6000,
+            })
           }
         }
       )
