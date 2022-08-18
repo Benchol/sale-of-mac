@@ -9,6 +9,6 @@ export class AppComponent {
   title = 'Machine-sale';
 
   @HostListener('window:scroll', ['$event']) onScroll(e: Event) {
-    console.log('scrolling', window.pageYOffset)
+    // console.log('scrolling', window.pageYOffset)
   }
 }

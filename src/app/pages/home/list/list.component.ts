@@ -102,7 +102,7 @@ export class ListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.globalService.refreshStatus = true
-    this.initFilter()    
+    this.initFilter()
     this.initSearchForm()
     this.authService.connected.subscribe(
       status => {
@@ -132,7 +132,8 @@ export class ListComponent implements OnInit, AfterViewInit {
     this.isLoaded = false;
     this.dataService.getAllMaterials().subscribe(
       data => {
-        console.log('list ss   => ', data);
+        if(data) {
+          console.log('list ss   => ', data);
 
         if (data.status) {
           console.log(data.message);
@@ -150,6 +151,7 @@ export class ListComponent implements OnInit, AfterViewInit {
           this.setDataCurrentPage(1, this.pageSize);
         } else {
           this.isLoaded = false;
+        }
         }
       }
     )
