@@ -59,6 +59,8 @@ export class LoginComponent implements OnInit {
           if(data.status) {
             this.globalService.user.next(data.data)
             console.log(this.globalService.user);
+            console.log('TokEN', data.token);
+            
             localStorage.setItem('token', data.token)
             this.authService.connected.next(true)            
             this.router.navigate(['/home/list'])

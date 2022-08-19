@@ -21,11 +21,11 @@
         </div>
         <ng-template #account>
             <div class="account cursor-pointer w-1/4 h-4/6 flex justify-center items-center rounded-md">
-                <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/2 mr-1" (click)="toProfil()">
-                    <fa-icon [icon]="faUserCheck"></fa-icon>
-                    <span class="text-sm ml-2">My account</span>
+                <div class="flex h-full mr-6 object-cover relative" [routerLink]="['/home/profil-user']">
+                    <img src="assets/images/Avatar-Maker.png" class="w-full h-full rounded-full" alt="">
+                    <div class="flex absolute z-2"></div>
                 </div>
-                <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/2 " (click)="toCart()">
+                <div class="cursor-pointer flex justify-center items-center bg-[#7FB5FF] rounded-md h-full w-1/3 " (click)="toCart()">
                     <fa-icon [icon]="faShoppingCart"></fa-icon>
                     <span class="text-sm ml-2">My cart</span>
                 </div>
@@ -33,7 +33,6 @@
         </ng-template>
     </div>
 </div>
-
 <p-breadcrumb class="flex w-full justify-center mb-6" [model]="items" [home]="home"></p-breadcrumb>
 
 
@@ -47,7 +46,7 @@
             <div class="w-full h-fit bg-[#f6f6f6] rounded-sm cursor-pointer tracking-wider text-xs text-[#454c48] font-normal p-2.5 flex justify-start items-center mt-2.5" [routerLink]="['update-user']">Mes informations personnelles</div>
             <div class="w-full h-fit bg-[#f6f6f6] rounded-sm cursor-pointer tracking-wider text-xs text-[#454c48] font-normal p-2.5 flex justify-start items-center mt-1.5" [routerLink]="['identifiants']">Mes identifiants et mot de passe</div>
             <div class="w-full h-fit bg-[#f6f6f6] rounded-sm cursor-pointer tracking-wider text-xs text-[#454c48] font-normal p-2.5 flex justify-start items-center mt-1.5" [routerLink]="['consent']">Mes consentements</div>
-
+            <div class="w-full h-fit bg-[#f6f6f6] rounded-sm cursor-pointer tracking-wider text-xs text-[#454c48] font-normal p-2.5 flex justify-start items-center mt-1.5" [routerLink]="['payment']">Payment</div>
             <div class="flex justify-start items-center mt-2">
                 <fa-icon [icon]="faUser"></fa-icon>
                 <span class="text-md ml-2">Mes achats</span>

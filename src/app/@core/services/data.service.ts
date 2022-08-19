@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
-  apiUrl = 'http://localhost:3000/api'
+  apiUrl = 'https://mac-market-app.herokuapp.com/api'
 
   constructor(private http: HttpClient) { }
 

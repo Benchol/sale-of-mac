@@ -10,6 +10,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthInterceptor } from './@core/interceptor/auth.interceptor';
 import { ErrorHandlerInterceptor } from './@core/interceptor/error-handler.interceptor';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AgGridModule } from 'ag-grid-angular';
+
+import { MatIconModule } from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AgGridModule,
+
+    MatIconModule
+
   ],
   providers: [
     {

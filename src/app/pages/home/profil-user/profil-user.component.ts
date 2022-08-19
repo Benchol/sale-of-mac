@@ -36,7 +36,8 @@ export class ProfilUserComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private formBuilder: FormBuilder,
-              private globalService: GlobalService
+              private globalService: GlobalService,
+              // private _snackbar: MatSnackBar
     ) { }
 
   ngOnInit(): void {

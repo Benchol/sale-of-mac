@@ -9,12 +9,13 @@ import { User } from '../../model/material/user.model';
 export class GlobalService {
 
   user = new BehaviorSubject<User | null>(null);
+  refreshStatus = false;
 
   constructor(private http: HttpClient) {
     this.user.asObservable();
    }
 
-  apiUrl = 'http://localhost:3000/api'
+  apiUrl = 'https://mac-market-app.herokuapp.com/api'
 
   addToCart(id: any): Observable<any> {
     return this.http.post<Observable<any>>(`${this.apiUrl}/user/addToCart`, {
@@ -22,10 +23,19 @@ export class GlobalService {
     });
   }
 
-  createPayment(id: string) {
+  createPayment(idUser: string, idProduct: string) {
     return this.http.post<Observable<any>>(`${this.apiUrl}/user/createPayment`, {
-      idProduct: id
+      idUser: idUser,
+      idProduct: idProduct
     })
+  }
+
+  getPayment(idPayment: any): Observable<any> {
+    return this.http.get<Observable<any>>(`${this.apiUrl}/user/getPayment/` + idPayment)
+  }
+
+  listPayment(): Observable<any>{
+    return this.http.get<Observable<any>>(`${this.apiUrl}/user/listPayment`)
   }
 
   deleteToCart(id: string): Observable<any> {

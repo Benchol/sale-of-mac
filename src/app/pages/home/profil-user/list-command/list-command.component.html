@@ -5,7 +5,7 @@
 </div>
 <div class="flex flex-col">
     <div class="flex mt-8 font-medium">Mes commandes en cours</div>
-    <div class="flex flex-col mt-6">
+    <div class="flex relative flex-col mt-6">
         <span class="flex" *ngIf="(length==0) else list">Vous n' avez pas de commandes en cours</span>
         <ng-template #list>
             <div id="list_cart" class="flex text-xs w-5/6 h-16 items-center justify-between my-8" *ngFor="let material of user$.cart">
@@ -16,13 +16,13 @@
                     <div class="flex w-4/6"> {{ material.title }} </div>
                     <div class="flex w-1/6 justify-end"> {{ material.price }} </div>
                 </div>
-                <div class="flex items-center justify-center ml-6 cursor-pointer" (click)="createPayment(material._id)">
+                <div class="flex items-center justify-center ml-6 cursor-pointer" (click)="createPayment(user$._id, material._id)">
                     <!-- <fa-icon class="flex text-red-500" [icon]="faClose"></fa-icon> -->
                     <!-- <i class="fa-solid fa-confirm flex text-red-500"></i> -->
                     <i class="fa-solid fa-credit-card flex text-green-500"></i>
                     <span class="flex text-green-500 ml-2">Buy</span>
                 </div>
-                <div class="flex items-center justify-center ml-6 cursor-pointer" (click)="deleteInCart(material._id)">
+                <div class="flex items-center justify-center ml-6 cursor-pointer" (click)="confirm_delete_element(material._id)">
                     <!-- <fa-icon class="flex text-red-500" [icon]="faClose"></fa-icon> -->
                     <i class="fa-solid fa-xmark flex text-red-500"></i>
                     <span class="flex text-red-500 ml-2">supprimer</span>
