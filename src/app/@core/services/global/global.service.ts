@@ -15,7 +15,7 @@ export class GlobalService {
     this.user.asObservable();
    }
 
-  apiUrl = 'http://localhost:3000/api'
+  apiUrl = 'https://mac-market-app.herokuapp.com/api'
 
   addToCart(id: any): Observable<any> {
     return this.http.post<Observable<any>>(`${this.apiUrl}/user/addToCart`, {

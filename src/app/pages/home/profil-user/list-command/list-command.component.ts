@@ -14,6 +14,8 @@ export class ListCommandComponent implements OnInit {
   user$!: User;
   length!: number;
 
+  deleting = false;
+
   constructor(
       private globalService: GlobalService,
       private router: Router,
@@ -84,6 +86,13 @@ export class ListCommandComponent implements OnInit {
       )
   }
 
+  confirm_delete_element(id: string) {
+    if(confirm('Vous êtes sur de vouloir supprimer ce materiel de votre card?')) {
+      this.deleteInCart(id);
+    }
+
+  }
+
   deleteInCart(id: string) {
     this.globalService.deleteToCart(id)
       .subscribe(
@@ -96,5 +105,6 @@ export class ListCommandComponent implements OnInit {
         }
       )
   }
+
 
 }

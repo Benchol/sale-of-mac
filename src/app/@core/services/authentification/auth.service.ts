@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AuthService {
 
-  apiUrl = 'http://localhost:3000/api/user'
+  apiUrl = 'https://mac-market-app.herokuapp.com/api/user'
 
   connected = new BehaviorSubject<boolean>(false);
   error = new BehaviorSubject<any | null>(null);

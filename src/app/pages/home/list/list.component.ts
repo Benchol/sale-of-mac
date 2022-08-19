@@ -25,6 +25,7 @@ export class ListComponent implements OnInit, AfterViewInit {
   dataList: any[] = [];
   isLoaded = false;
   dataPerPage: any[] = [];
+  value = 1;
 
   connected!: boolean;
   added!: boolean;
@@ -51,14 +52,15 @@ export class ListComponent implements OnInit, AfterViewInit {
   //For Filter
   isCheck!: boolean;
 
+  clicked_add = false;
 
   constructor(
-      private dataService: DataService,
-      private authService: AuthService,
-      private globalService: GlobalService,
-      private formBuilder: FormBuilder,
-      private router: Router
-      ) {
+    private dataService: DataService,
+    private authService: AuthService,
+    private globalService: GlobalService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
   }
 
   sleep(millsec: number): Promise<void> {
@@ -95,7 +97,7 @@ export class ListComponent implements OnInit, AfterViewInit {
     this.dataPerPage = []
     for (let i = begin, j = 0; i < end; i++, j++) {
       // console.log('Set data current', this.dataList[i]);
-      
+
       this.dataPerPage[j] = this.dataList[i]
     }
   }
@@ -106,9 +108,9 @@ export class ListComponent implements OnInit, AfterViewInit {
     this.initSearchForm()
     this.authService.connected.subscribe(
       status => {
-        this.connected = status;  
+        this.connected = status;
         console.log('Status =>', this.connected);
-        
+
       }
     )
     this.items = [
@@ -132,26 +134,26 @@ export class ListComponent implements OnInit, AfterViewInit {
     this.isLoaded = false;
     this.dataService.getAllMaterials().subscribe(
       data => {
-        if(data) {
+        if (data) {
           console.log('list ss   => ', data);
 
-        if (data.status) {
-          console.log(data.message);
-          if(data.user) {
-            this.globalService.user.next(data.user)
-            console.log('Status connected: ', data.user.isConnected);
-            this.authService.connected.next(data.user.isConnected)
+          if (data.status) {
+            console.log(data.message);
+            if (data.user) {
+              this.globalService.user.next(data.user)
+              console.log('Status connected: ', data.user.isConnected);
+              this.authService.connected.next(data.user.isConnected)
+            } else {
+              this.router.navigate(['/auth/login'])
+            }
+            this.dataList = data.data;
+            this.isLoaded = true;
+            console.log(this.dataList);
+            this.length = this.dataList.length;
+            this.setDataCurrentPage(1, this.pageSize);
           } else {
-            this.router.navigate(['/auth/login'])
+            this.isLoaded = false;
           }
-          this.dataList = data.data;
-          this.isLoaded = true;
-          console.log(this.dataList);
-          this.length = this.dataList.length;
-          this.setDataCurrentPage(1, this.pageSize);
-        } else {
-          this.isLoaded = false;
-        }
         }
       }
     )
@@ -203,7 +205,7 @@ export class ListComponent implements OnInit, AfterViewInit {
     const dur5 = this.filterForm.get('dur_320_Go')?.value
     const dur6 = this.filterForm.get('dur_256_Go')?.value
 
-    
+
   }
 
   search() {
@@ -230,19 +232,28 @@ export class ListComponent implements OnInit, AfterViewInit {
       })
   }
 
-  addToCart(id: any) {
+  async addToCart(index: number, id: any) {
     // console.log(typeof(id));
-    
-    if(this.connected) {
+    let selector = index.toString()
+    let icon = document.getElementById(selector);
+    if (this.connected) {
+      // if (icon) {
+      //   console.log(icon.children[0]);
+      //   // icon.innerHTML = `<mat-progress-spinner color="accent" diameter="20" class="text-sm" mode="indeterminate"></mat-progress-spinner>`
+      // }
       this.globalService.addToCart(id)
-      .subscribe(
-        data => {
-          console.log(data.message);
-          console.log(data.data);
-          
-          this.globalService.user.next(data.data)
-        }
-      )
+        .subscribe(
+          async (data) => {
+            if (icon) {
+              icon.children[0].innerHTML = `<mat-icon class="pr-1.5 h-auto text-xl">done_all</mat-icon>`;
+              icon.children[1].innerHTML = `<span class="pl-0.5">Ajouté</span>`;
+              await this.sleep(2000);
+              icon.children[0].innerHTML = `<mat-icon class="pr-1.5 h-auto text-xl">add_shopping_cart</mat-icon>`;
+              icon.children[1].innerHTML = `<span class="pl-2.5">Ajouter au panier</span>`;
+            }
+            this.globalService.user.next(data.data)
+          }
+        )
     } else {
       this.router.navigate(['/auth/login'])
     }

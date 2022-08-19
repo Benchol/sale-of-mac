@@ -12,6 +12,9 @@ import { ErrorHandlerInterceptor } from './@core/interceptor/error-handler.inter
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AgGridModule } from 'ag-grid-angular';
 
+import { MatIconModule } from '@angular/material/icon';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +27,10 @@ import { AgGridModule } from 'ag-grid-angular';
     BrowserAnimationsModule,
     HttpClientModule,
     FontAwesomeModule,
-    AgGridModule
+    AgGridModule,
+
+    MatIconModule
+
   ],
   providers: [
     {
